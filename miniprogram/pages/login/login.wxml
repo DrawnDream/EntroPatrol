@@ -1,0 +1,28 @@
+<view class="login-container">
+  <view class="login-logo">
+    <text class="logo-text">🌱</text>
+    <text class="app-title">智墒巡田</text>
+    <text class="app-subtitle">四足机器人田间监测系统</text>
+  </view>
+  
+  <view class="login-form">
+    <view class="form-group">
+      <text class="form-label">账号</text>
+      <input class="form-control" type="text" placeholder="请输入账号" value="{{username}}" bindinput="onUsernameInput"/>
+    </view>
+    
+    <view class="form-group">
+      <text class="form-label">密码</text>
+      <input class="form-control" type="password" placeholder="请输入密码" value="{{password}}" bindinput="onPasswordInput"/>
+    </view>
+    
+    <button class="btn btn-primary" style="width:100%;margin-top:30rpx;" bindtap="login" disabled="{{loading}}">
+      {{loading ? '登录中...' : '登录'}}
+    </button>
+    
+    <view class="login-tips">
+      <text class="tips-text">默认账号：123</text>
+      <text class="tips-text">默认密码：***</text>
+    </view>
+  </view>
+</view>

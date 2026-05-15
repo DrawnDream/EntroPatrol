@@ -1,0 +1,66 @@
+<view class="container">
+  <view class="card">
+    <view class="card-header">
+      <view>
+        <text class="card-title">🤖 AI智能分析</text>
+        <text class="card-subtitle">基于DeepSeek大模型的农业数据分析</text>
+      </view>
+    </view>
+
+    <view class="tabs">
+      <text class="tab-item {{activeTab === 'drought' ? 'active' : ''}}" bindtap="setTab" data-tab="drought">旱情分析</text>
+      <text class="tab-item {{activeTab === 'crop' ? 'active' : ''}}" bindtap="setTab" data-tab="crop">作物预测</text>
+      <text class="tab-item {{activeTab === 'custom' ? 'active' : ''}}" bindtap="setTab" data-tab="custom">自定义分析</text>
+    </view>
+
+    <view wx:if="{{activeTab === 'drought'}}">
+      <text style="color:#666;font-size:28rpx;margin-bottom:20rpx;display:block;">
+        基于最近土壤监测数据，AI将分析当前墒情状况、潜在旱情风险等级，并提供灌溉建议。
+      </text>
+      <button class="btn btn-primary" style="width:100%;" bindtap="startDroughtAnalysis" disabled="{{loading}}">
+        {{loading ? '分析中...' : '开始旱情分析'}}
+      </button>
+    </view>
+
+    <view wx:if="{{activeTab === 'crop'}}">
+      <view class="form-group">
+        <text class="form-label">选择作物类型</text>
+        <picker mode="selector" range="{{cropTypes}}" value="{{cropIndex}}" bindchange="onCropChange">
+          <view class="form-control">
+            {{cropTypes[cropIndex] || '请选择作物类型'}}
+          </view>
+        </picker>
+      </view>
+      <text style="color:#666;font-size:28rpx;margin-bottom:20rpx;display:block;">
+        基于最近作物生长数据，AI将评估作物生长阶段、健康状况，并提供管理建议。
+      </text>
+      <button class="btn btn-primary" style="width:100%;" bindtap="startCropPrediction" disabled="{{loading}}">
+        {{loading ? '分析中...' : '开始作物预测'}}
+      </button>
+    </view>
+
+    <view wx:if="{{activeTab === 'custom'}}">
+      <view class="form-group">
+        <text class="form-label">输入分析问题</text>
+        <textarea class="form-control" placeholder="请输入您想要分析的问题，例如：最近一周的土壤湿度变化趋势如何？" value="{{customPrompt}}" bindinput="onPromptInput" style="height:200rpx;"></textarea>
+      </view>
+      <button class="btn btn-primary" style="width:100%;" bindtap="startCustomAnalysis" disabled="{{loading || !customPrompt.trim()}}">
+        {{loading ? '分析中...' : '提交分析'}}
+      </button>
+    </view>
+
+    <view wx:if="{{loading}}" class="loading" style="margin-top:40rpx;">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">AI分析中，请稍候...</text>
+    </view>
+
+    <view wx:if="{{response && !loading}}">
+      <view class="card-header" style="padding-bottom:10rpx;margin-top:30rpx;">
+        <text class="card-title" style="font-size:28rpx;">📝 AI分析结果</text>
+      </view>
+      <view class="ai-response">
+        <text>{{response}}</text>
+      </view>
+    </view>
+  </view>
+</view>

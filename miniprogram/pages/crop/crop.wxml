@@ -1,0 +1,106 @@
+<view class="container">
+  <view class="card">
+    <view class="card-header">
+      <view>
+        <text class="card-title">🌱 作物数据管理</text>
+        <text class="card-subtitle">作物生长监测数据</text>
+      </view>
+      <button class="btn btn-primary" bindtap="showAddModal">添加数据</button>
+    </view>
+    
+    <view class="data-list">
+      <view wx:for="{{cropData}}" wx:key="_id" class="data-item" style="flex-direction:column;align-items:flex-start;">
+        <view style="display:flex;justify-content:space-between;width:100%;margin-bottom:12rpx;">
+          <text class="data-label">{{item.displayTime}}</text>
+          <text class="data-value" style="color:#2E7D32;">{{item.cropType}}</text>
+        </view>
+        <view style="display:flex;flex-wrap:wrap;gap:30rpx;">
+          <view>
+            <text class="data-label">位置：</text>
+            <text class="data-value">{{item.displayLocation}}</text>
+          </view>
+          <view>
+            <text class="data-label">株高：</text>
+            <text class="data-value">{{item.height}}cm</text>
+          </view>
+          <view>
+            <text class="data-label">LAI：</text>
+            <text class="data-value">{{item.leafAreaIndex}}</text>
+          </view>
+          <view>
+            <text class="data-label">NDVI：</text>
+            <text class="data-value">{{item.displayNdvi}}</text>
+          </view>
+          <view>
+            <text class="data-label">叶绿素：</text>
+            <text class="data-value">{{item.chlorophyllContent}}</text>
+          </view>
+          <view>
+            <text class="data-label">冠层温度：</text>
+            <text class="data-value">{{item.canopyTemperature}}°C</text>
+          </view>
+          <view>
+            <text class="data-label">湿度：</text>
+            <text class="data-value">{{item.humidity}}%</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view wx:if="{{!cropData.length}}" class="loading">
+      <text class="loading-text">暂无数据</text>
+    </view>
+  </view>
+
+  <view wx:if="{{showModal}}" class="modal-overlay" bindtap="hideModal">
+    <view class="modal-content" bindtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">添加作物数据</text>
+        <text class="modal-close" bindtap="hideModal">×</text>
+      </view>
+      
+      <view class="form-group">
+        <text class="form-label">作物类型</text>
+        <picker mode="selector" range="{{cropTypes}}" value="{{cropIndex}}" bindchange="onCropChange">
+          <view class="form-control">
+            {{cropTypes[cropIndex] || '请选择作物类型'}}
+          </view>
+        </picker>
+      </view>
+      <view class="form-group">
+        <text class="form-label">纬度</text>
+        <input class="form-control" type="digit" placeholder="请输入纬度" value="{{newData.location.latitude}}" bindinput="onInput" data-field="latitude"/>
+      </view>
+      <view class="form-group">
+        <text class="form-label">经度</text>
+        <input class="form-control" type="digit" placeholder="请输入经度" value="{{newData.location.longitude}}" bindinput="onInput" data-field="longitude"/>
+      </view>
+      <view class="form-group">
+        <text class="form-label">株高(cm)</text>
+        <input class="form-control" type="number" placeholder="请输入株高" value="{{newData.height}}" bindinput="onInput" data-field="height"/>
+      </view>
+      <view class="form-group">
+        <text class="form-label">叶面积指数(LAI)</text>
+        <input class="form-control" type="digit" placeholder="请输入LAI" value="{{newData.leafAreaIndex}}" bindinput="onInput" data-field="leafAreaIndex"/>
+      </view>
+      <view class="form-group">
+        <text class="form-label">NDVI</text>
+        <input class="form-control" type="digit" placeholder="请输入NDVI" value="{{newData.ndvi}}" bindinput="onInput" data-field="ndvi"/>
+      </view>
+      <view class="form-group">
+        <text class="form-label">叶绿素含量</text>
+        <input class="form-control" type="number" placeholder="请输入叶绿素含量" value="{{newData.chlorophyllContent}}" bindinput="onInput" data-field="chlorophyllContent"/>
+      </view>
+      <view class="form-group">
+        <text class="form-label">冠层温度(°C)</text>
+        <input class="form-control" type="digit" placeholder="请输入温度" value="{{newData.canopyTemperature}}" bindinput="onInput" data-field="canopyTemperature"/>
+      </view>
+      <view class="form-group">
+        <text class="form-label">空气湿度(%)</text>
+        <input class="form-control" type="number" placeholder="请输入湿度" value="{{newData.humidity}}" bindinput="onInput" data-field="humidity"/>
+      </view>
+      
+      <button class="btn btn-primary" style="width:100%;" bindtap="submitData">提交</button>
+    </view>
+  </view>
+</view>

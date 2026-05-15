@@ -1,0 +1,95 @@
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #2E7D32 0%, #1B5E20 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40rpx;
+}
+
+.login-logo {
+  text-align: center;
+  margin-bottom: 60rpx;
+}
+
+.logo-text {
+  font-size: 100rpx;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.app-title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12rpx;
+}
+
+.app-subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.login-form {
+  width: 100%;
+  max-width: 600rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  margin-bottom: 30rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 16rpx;
+}
+
+.form-control {
+  width: 100%;
+  padding: 24rpx;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+  background: #fafafa;
+}
+
+.form-control:focus {
+  border-color: #2E7D32;
+  background: #ffffff;
+}
+
+.btn {
+  padding: 24rpx;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+  color: #ffffff;
+  box-shadow: 0 4rpx 16rpx rgba(46, 125, 50, 0.4);
+}
+
+.login-tips {
+  margin-top: 30rpx;
+  text-align: center;
+}
+
+.tips-text {
+  display: block;
+  font-size: 24rpx;
+  color: #999999;
+  margin-bottom: 8rpx;
+}

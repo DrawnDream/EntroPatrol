@@ -1,0 +1,99 @@
+<view class="container">
+  <view class="swiper-container">
+    <swiper indicator-dots="true" autoplay="true" interval="4000" duration="800" circular="true" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#ffffff">
+      <swiper-item>
+        <image src="/images/slide1.png" mode="aspectFill" class="swiper-image"/>
+        <view class="swiper-overlay">
+          <text class="swiper-subtitle">四足机器人自主巡田采集</text>
+          <text class="swiper-title">智能田间感知</text>
+          <text class="swiper-desc">搭载多传感器的四足机器人，自动采集土壤湿度、温度、作物生长数据</text>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <image src="/images/slide2.png" mode="aspectFill" class="swiper-image"/>
+        <view class="swiper-overlay">
+          <text class="swiper-subtitle">DeepSeek大模型赋能</text>
+          <text class="swiper-title">AI智能分析</text>
+          <text class="swiper-desc">基于深度学习的作物生长分析，精准预测病虫害、旱情预警</text>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <image src="/images/slide3.png" mode="aspectFill" class="swiper-image"/>
+        <view class="swiper-overlay">
+          <text class="swiper-subtitle">实时监测一目了然</text>
+          <text class="swiper-title">数据可视化</text>
+          <text class="swiper-desc">直观的数据展示，实时掌握田间状况</text>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <view class="card">
+    <view class="card-header">
+      <view>
+        <text class="card-title">📊 数据概览</text>
+        <text class="card-subtitle">实时监测数据汇总</text>
+      </view>
+    </view>
+    
+    <view class="stats-grid">
+      <view class="stat-card">
+        <text class="stat-value">{{displayStats.totalSoilSamples}}</text>
+        <text class="stat-label">土壤样本数</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-value">{{displayStats.totalCropSamples}}</text>
+        <text class="stat-label">作物样本数</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-value">{{displayStats.avgSoilMoisture}}%</text>
+        <text class="stat-label">平均土壤湿度</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-value">{{displayStats.avgSoilTemperature}}°C</text>
+        <text class="stat-label">平均土壤温度</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-value">{{displayStats.avgCropHeight}}cm</text>
+        <text class="stat-label">平均株高</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-value">{{displayStats.avgNDVI}}</text>
+        <text class="stat-label">平均NDVI</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-value">{{displayStats.samplingLocations}}</text>
+        <text class="stat-label">采样位置数</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-value">{{displayStats.moistureRange}}</text>
+        <text class="stat-label">湿度范围</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-header">
+      <view>
+        <text class="card-title">🌡️ 最近土壤数据</text>
+      </view>
+    </view>
+    
+    <view class="data-list">
+      <view wx:for="{{recentSoilData}}" wx:key="_id" class="data-item">
+        <view>
+          <text class="data-label">{{item.displayTime}}</text>
+          <text class="data-label" style="font-size:22rpx;color:#999;">{{item.displayLocation}}</text>
+        </view>
+        <view style="text-align:right;">
+          <text class="data-value">{{item.moisture}}%</text>
+          <text class="data-label" style="font-size:22rpx;color:#999;">湿度</text>
+        </view>
+      </view>
+    </view>
+    
+    <view wx:if="{{!recentSoilData.length}}" class="loading">
+      <text class="loading-text">暂无数据</text>
+    </view>
+  </view>
+</view>

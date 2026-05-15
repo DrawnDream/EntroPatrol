@@ -1,0 +1,55 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/soil/soil",
+    "pages/crop/crop",
+    "pages/analysis/analysis",
+    "pages/ai/ai",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "智墒巡田",
+    "navigationBarBackgroundColor": "#2E7D32",
+    "backgroundColor": "#f5f7fa"
+  },
+  "tabBar": {
+    "color": "#6b7280",
+    "selectedColor": "#2E7D32",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "数据概览",
+        "iconPath": "images/dashboard.png",
+        "selectedIconPath": "images/dashboard-active.png"
+      },
+      {
+        "pagePath": "pages/soil/soil",
+        "text": "土壤数据",
+        "iconPath": "images/soil.png",
+        "selectedIconPath": "images/soil-active.png"
+      },
+      {
+        "pagePath": "pages/crop/crop",
+        "text": "作物数据",
+        "iconPath": "images/crop.png",
+        "selectedIconPath": "images/crop-active.png"
+      },
+      {
+        "pagePath": "pages/ai/ai",
+        "text": "AI分析",
+        "iconPath": "images/ai.png",
+        "selectedIconPath": "images/ai-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "个人中心",
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/user-active.png"
+      }
+    ]
+  }
+}

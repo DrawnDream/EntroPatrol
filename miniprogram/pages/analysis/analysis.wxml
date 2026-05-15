@@ -1,0 +1,96 @@
+<view class="container">
+  <view class="tabs">
+    <text class="tab-item {{activeTab === 'drought' ? 'active' : ''}}" bindtap="setTab" data-tab="drought">旱情预警</text>
+    <text class="tab-item {{activeTab === 'health' ? 'active' : ''}}" bindtap="setTab" data-tab="health">作物健康</text>
+  </view>
+
+  <view wx:if="{{activeTab === 'drought'}}">
+    <view class="card">
+      <view class="card-header">
+        <view>
+          <text class="card-title">🌡️ 旱情预警分析</text>
+          <text class="card-subtitle">土壤墒情监测预警</text>
+        </view>
+        <view style="display:flex;gap:20rpx;font-size:24rpx;">
+          <text style="color:#c62828;">严重: {{severeCount}}</text>
+          <text style="color:#ef6c00;">警告: {{warningCount}}</text>
+        </view>
+      </view>
+      
+      <view class="data-list">
+        <view wx:for="{{droughtWarnings}}" wx:key="_id" class="data-item" style="flex-direction:column;align-items:flex-start;">
+          <view style="display:flex;justify-content:space-between;width:100%;margin-bottom:12rpx;">
+            <text class="data-label">{{item.displayTime}}</text>
+            <text class="warning-badge {{item.droughtLevel}}">{{item.droughtLevelText}}</text>
+          </view>
+          <view style="display:flex;flex-wrap:wrap;gap:30rpx;margin-bottom:12rpx;">
+            <view>
+              <text class="data-label">位置：</text>
+              <text class="data-value">{{item.displayLocation}}</text>
+            </view>
+            <view>
+              <text class="data-label">深度：</text>
+              <text class="data-value">{{item.depth}}cm</text>
+            </view>
+            <view>
+              <text class="data-label">湿度：</text>
+              <text class="data-value">{{item.moisture}}%</text>
+            </view>
+            <view>
+              <text class="data-label">温度：</text>
+              <text class="data-value">{{item.temperature}}°C</text>
+            </view>
+          </view>
+          <view style="background:#f8fafc;padding:16rpx;border-radius:8rpx;">
+            <text class="data-value" style="font-size:26rpx;color:#666;">⚠️ {{item.message}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <view wx:if="{{!droughtWarnings.length}}" class="loading">
+        <text class="loading-text">暂无数据</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{activeTab === 'health'}}">
+    <view class="card">
+      <view class="card-header">
+        <view>
+          <text class="card-title">🌱 作物健康分析</text>
+          <text class="card-subtitle">作物生长状况评估</text>
+        </view>
+      </view>
+      
+      <view class="data-list">
+        <view wx:for="{{cropHealth}}" wx:key="_id" class="data-item" style="flex-direction:column;align-items:flex-start;">
+          <view style="display:flex;justify-content:space-between;width:100%;margin-bottom:12rpx;">
+            <text class="data-label">{{item.displayTime}} · {{item.cropType}}</text>
+            <text class="health-badge {{item.status}}">{{item.statusText}}</text>
+          </view>
+          <view style="display:flex;flex-wrap:wrap;gap:30rpx;margin-bottom:12rpx;">
+            <view>
+              <text class="data-label">株高：</text>
+              <text class="data-value">{{item.height}}cm</text>
+            </view>
+            <view>
+              <text class="data-label">NDVI：</text>
+              <text class="data-value">{{item.displayNdvi}}</text>
+            </view>
+            <view>
+              <text class="data-label">健康评分：</text>
+              <text class="data-value">{{item.healthScore}}分</text>
+            </view>
+          </view>
+          <view style="background:#f8fafc;padding:16rpx;border-radius:8rpx;">
+            <text class="data-value" style="font-size:26rpx;color:#666;">💡 {{item.advice}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <view wx:if="{{!cropHealth.length}}" class="loading">
+        <text class="loading-text">暂无数据</text>
+      </view>
+    </view>
+  </view>
+</view>
